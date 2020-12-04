@@ -47,7 +47,7 @@ function Upload({setUploadPercentage,setUrl,setTime}) {
         div.addEventListener('dragover', handleDrag)
         div.addEventListener('drop', handleDrop)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[dropRef]);
+    },[]);
 
 
     

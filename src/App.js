@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Upload from './Components/Upload';
+import Uploaded from './Components/Uploaded';
+import Uploading from './Components/Uploading';
 
 function App() {
+  const [percentage,setUploadPercentage] = useState(0);
+  const [time,setTime] = useState(0);
+  const [url,setUrl] = useState(''); 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {
+        percentage>0
+        ? 
+        <Uploading time={time}/>
+        : 
+        url
+        ?
+        <Uploaded url={url}/>
+        :
+        <Upload setUploadPercentage={setUploadPercentage} setUrl={setUrl} setTime={setTime}/>
+      }
+    </>
   );
 }
 

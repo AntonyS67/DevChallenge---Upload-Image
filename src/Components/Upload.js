@@ -9,14 +9,6 @@ function Upload({setUploadPercentage,setUrl,setTime}) {
     const dropRef = React.createRef();
     const url = "https://api.cloudinary.com/v1_1/dpb53nq0u/image/upload";
 
-    useEffect(() => {   
-        let div = dropRef.current;
-        div.addEventListener('dragenter', handleDragIn)
-        div.addEventListener('dragleave', handleDragOut)
-        div.addEventListener('dragover', handleDrag)
-        div.addEventListener('drop', handleDrop)
-    },[]);
-
     const handleDrag = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -33,7 +25,7 @@ function Upload({setUploadPercentage,setUrl,setTime}) {
         e.preventDefault();
         e.stopPropagation();
         setDragCounter(dragCounter-1);
-        if(dragCounter > 0 ) return;
+        if(dragCounter > 0 ) return dragging;
         setDragging(false);
     }
     const handleDrop = (e) => {
@@ -47,6 +39,16 @@ function Upload({setUploadPercentage,setUrl,setTime}) {
             setDragCounter(0);
         }
     }
+
+    useEffect(() => {   
+        let div = dropRef.current;
+        div.addEventListener('dragenter', handleDragIn)
+        div.addEventListener('dragleave', handleDragOut)
+        div.addEventListener('dragover', handleDrag)
+        div.addEventListener('drop', handleDrop)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[dropRef]);
+
 
     
     const uploadImage = async files => {
